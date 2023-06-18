@@ -96,8 +96,6 @@ sudo cp /etc/apt/sources.list_backup /etc/apt/sources.list
 } &>/dev/null
 }
 
-
-
 install_openvpn()
 {
 clear
@@ -563,7 +561,7 @@ echo '{
   "up_mbps": 100,
   "down_mbps": 100,
   "disable_udp": false,
-  "obfs": "boy",
+  "obfs": "dex",
   "auth": {
     "mode": "external",
     "config": {
@@ -795,28 +793,21 @@ output=$(cat <<EOF
 }
 EOF
 )
-
 echo $output
 
 elif [[ $service == "reboot" ]];
 then
 sudo shutdown -r now
 fi
-
 EOM
-
 
 chmod +x /etc/hysteria/online.sh
 chmod +x /etc/hysteria/monitor.sh
 chmod +x /etc/hysteria/ws.sh
 }
 
-
-
 create_hostname() {
-
 clear
-
 echo 'Creating hostname.'
 {
 cat << EOF > /etc/hysteria/server.crt
@@ -953,7 +944,6 @@ sKKWTJk08giHse+yqTKQ05uR
 -----END PRIVATE KEY-----
 EOF
 
-
 cat <<\EOM >/etc/hysteria/config.sh
 #!/bin/bash
 HOST='DBHOST'
@@ -962,12 +952,10 @@ PASS='DBPASS'
 DB='DBNAME'
 EOM
 
-
 sed -i "s|DBHOST|$HOST|g" /etc/hysteria/config.sh
 sed -i "s|DBUSER|$USER|g" /etc/hysteria/config.sh
 sed -i "s|DBPASS|$PASS|g" /etc/hysteria/config.sh
 sed -i "s|DBNAME|$DBNAME|g" /etc/hysteria/config.sh
-
 
 chmod 755 /etc/hysteria/config.json
 chmod 755 /etc/hysteria/server.crt
@@ -975,7 +963,6 @@ chmod 755 /etc/hysteria/server.key
 chmod 755 /etc/hysteria/ws.sh
 }
 }
-
 
 installBBR() {
     echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
@@ -1067,7 +1054,6 @@ echo 'Server will secure this server and reboot after 20 seconds'
 sleep 20
 reboot
 }
-
 
 server_ip=$(curl -s https://api.ipify.org)
 server_interface=$(ip route get 8.8.8.8 | awk '/dev/ {f=NR} f&&NR-1==f' RS=" ")
