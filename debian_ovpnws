@@ -942,10 +942,11 @@ EOF
 
 cat <<\EOM >/etc/hysteria/config.sh
 #!/bin/bash
-HOST='185.61.137.171';
-USER='mediatek2_testmic';
-PASS='F1005r90@';
-DBNAME='mediatek2_testmic';
+#!/bin/bash
+HOST='DBHOST'
+USER='DBUSER'
+PASS='DBPASS'
+DB='DBNAME'
 EOM
 
 
